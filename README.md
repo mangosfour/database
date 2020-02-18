@@ -6,18 +6,18 @@
 <a href='https://www.getmangos.eu/github-activity/' target='getmangos.activity'><img src='/icons/ACTIVITY.gif' border=0></a>
 <a href='https://www.getmangos.eu/bug-tracker/mangos-three/' target='getmangos.tracker'><img src='/icons/TRACKER.gif' border=0></a>
 <br />Build Status: <br/>Linux 
-<a href='https://travis-ci.org/mangosthree/server/builds' target='MangosThree'><img src='https://travis-ci.org/mangosthree/server.png' border=0></a>
+<a href='https://travis-ci.org/mangosfour/server/builds' target='MangosFour'><img src='https://travis-ci.org/mangosfour/server.png' border=0></a>
  Windows 
-<a href='https://ci.appveyor.com/project/MaNGOS/server-wtbhv/history' target='MangosThree'><img src='https://ci.appveyor.com/api/projects/status/github/mangosthree/server?branch=develop21&svg=true' border=0></a>
+<a href='https://ci.appveyor.com/project/MaNGOS/server-wtbhv/history' target='MangosFour'><img src='https://ci.appveyor.com/api/projects/status/github/mangosfour/server?branch=master&svg=true' border=0></a>
 </td></tr></table>
 
-Cata World Database
+Mists of Pandaria World Database
 ===
 
-### A World Database for Cata Wow
+### A World Database for Mists of Pandaria Wow
 ----
-A content database for [**Cata**][10] MaNGOS Servers, and [**World of Warcraft**][50] Client Patch
-4.3.4a - [_WoW 4.3.4a_][51].
+A content database for [**MOP**][10] MaNGOS Servers, and [**World of Warcraft**][50] Client Patch
+5.4.8 - [_WoW 5.4.8_][51].
 
 ### How to Install
 ---------------
@@ -30,7 +30,7 @@ A content database for [**Cata**][10] MaNGOS Servers, and [**World of Warcraft**
 1. Run: **InstallDatabases.bat** and follow the onscreen prompts.
 
 
-[10]: https://github.com/mangosthree/server "mangosThree"
+[10]: https://github.com/mangosthree/server "mangosFour"
 
 [50]: http://blizzard.com/games/wow/ "World of Warcraft"
-[51]: http://www.wowpedia.org/Patch_4.3.4a "WoW 4.3.4a"
+[51]: http://www.wowpedia.org/Patch_5.4.8 "WoW 5.4.8"
