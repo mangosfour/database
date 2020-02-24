@@ -30,7 +30,7 @@ A content database for [**MOP**][10] MaNGOS Servers, and [**World of Warcraft**]
 1. Run: **InstallDatabases.bat** and follow the onscreen prompts.
 
 
-[10]: https://github.com/mangosthree/server "mangosFour"
+[10]: https://github.com/mangosFour/server "mangosFour"
 
 [50]: http://blizzard.com/games/wow/ "World of Warcraft"
 [51]: http://www.wowpedia.org/Patch_5.4.8 "WoW 5.4.8"
