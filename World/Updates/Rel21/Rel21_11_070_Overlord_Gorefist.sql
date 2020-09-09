@@ -19,17 +19,17 @@ BEGIN
     -- Expected Values
     SET @cOldVersion = '21'; 
     SET @cOldStructure = '11'; 
-    SET @cOldContent = '068';
+    SET @cOldContent = '069';
 
     -- New Values
     SET @cNewVersion = '21';
     SET @cNewStructure = '11';
-    SET @cNewContent = '069';
+    SET @cNewContent = '070';
                             -- DESCRIPTION IS 30 Characters MAX    
-    SET @cNewDescription = 'Brainwashed Noble';
+    SET @cNewDescription = 'Overlord Gorefist';
 
                         -- COMMENT is 150 Characters MAX
-    SET @cNewComment = 'Brainwashed Noble';
+    SET @cNewComment = 'Overlord Gorefist';
 
     -- Evaluate all settings
     SET @cCurResult := (SELECT `description` FROM `db_version` ORDER BY `version` DESC, `STRUCTURE` DESC, `CONTENT` DESC LIMIT 0,1);
@@ -43,23 +43,20 @@ BEGIN
         -- -- PLACE UPDATE SQL BELOW -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
 
-    
--- Brainwashed Noble
-UPDATE `creature_template` SET `AIName` = 'EventAI' WHERE `Entry` = 596;
-DELETE FROM `creature_ai_scripts` WHERE `creature_id` = 596;
+    -- Overlord Gorefist
+DELETE FROM `creature_ai_scripts` WHERE `creature_id` = 18160;
 INSERT INTO `creature_ai_scripts` VALUES
-(59601,596,27,0,100,1,12544,1,15000,30000,11,12544,0,33,0,0,0,0,0,0,0,0,'Brainwashed Noble - Cast Frost Armor on Missing Buff'),
-(59602,596,4,0,100,0,0,0,0,0,21,1,0,0,22,1,0,0,0,0,0,0,'Brainwashed Noble - Enable Dynamic Movement and Set Phase 1 on Aggro'),
-(59603,596,9,13,100,1,0,40,2100,3400,11,9053,1,0,0,0,0,0,0,0,0,0,'Brainwashed Noble - Cast Fireball (Phase 1)'),
-(59604,596,9,13,100,1,9,80,1000,1000,21,1,0,0,0,0,0,0,0,0,0,0,'Brainwashed Noble - Enable Dynamic Movement at 9-80 Yards (Phase 1)'),
-(59605,596,9,0,100,1,0,8,1000,1000,21,0,0,0,0,0,0,0,0,0,0,0,'Brainwashed Noble - Disable Dynamic Movement at 0-8 Yards'),
-(59606,596,3,13,100,0,7,0,0,0,21,0,0,0,22,2,0,0,0,0,0,0,'Brainwashed Noble - Disable Dynamic Movement and Set Phase 2 at 7% MP (Phase 1)'),
-(59607,596,3,11,100,1,100,15,1000,1000,22,1,0,0,0,0,0,0,0,0,0,0,'Brainwashed Noble - Set Phase 1 at 15% MP (Phase 2)'),
-(59608,596,0,0,80,1,18000,25000,25000,35000,11,228,1,0,0,0,0,0,0,0,0,0,'Brainwashed Noble - Cast Polymorph: Chicken'),
-(59609,596,2,0,100,1,50,0,35000,35000,11,512,1,0,0,0,0,0,0,0,0,0,'Brainwashed Noble - Cast Chains of Ice at 50% HP'),
-(59610,596,2,0,100,0,15,0,0,0,21,0,0,0,22,3,0,0,0,0,0,0,'Brainwashed Noble - Disable Dynamic Movement and Set Phase 3 at 15% HP'),
-(59611,596,2,7,100,0,15,0,0,0,25,0,0,0,1,-47,0,0,0,0,0,0,'Brainwashed Noble - Flee at 15% HP (Phase 3)'),
-(59612,596,7,0,100,0,0,0,0,0,22,0,0,0,0,0,0,0,0,0,0,0,'Brainwashed Noble - Set Phase to 0 on Evade');
+(1816001,18160,4,0,100,0,0,0,0,0,11,33962,0,2,0,0,0,0,0,0,0,0,'Overlord Gorefist - Cast Toughen on Aggro'),
+(1816002,18160,9,0,100,1,0,5,6000,9000,11,15496,1,0,0,0,0,0,0,0,0,0,'Overlord Gorefist - Cast Cleave'),
+(1816003,18160,2,0,100,0,90,0,0,0,11,33962,0,2,0,0,0,0,0,0,0,0,'Overlord Gorefist - Cast Toughen at 90% HP'),
+(1816004,18160,2,0,100,0,80,0,0,0,11,33962,0,2,0,0,0,0,0,0,0,0,'Overlord Gorefist - Cast Toughen at 80% HP'),
+(1816005,18160,2,0,100,0,70,0,0,0,11,33962,0,2,0,0,0,0,0,0,0,0,'Overlord Gorefist - Cast Toughen at 70% HP'),
+(1816006,18160,2,0,100,0,60,0,0,0,11,33962,0,2,0,0,0,0,0,0,0,0,'Overlord Gorefist - Cast Toughen at 60% HP'),
+(1816007,18160,2,0,100,0,50,0,0,0,11,33962,0,2,0,0,0,0,0,0,0,0,'Overlord Gorefist - Cast Toughen at 50% HP'),
+(1816008,18160,2,0,100,0,40,0,0,0,11,33962,0,2,0,0,0,0,0,0,0,0,'Overlord Gorefist - Cast Toughen at 40% HP'),
+(1816009,18160,2,0,100,0,30,0,0,0,11,33962,0,2,0,0,0,0,0,0,0,0,'Overlord Gorefist - Cast Toughen at 30% HP'),
+(1816010,18160,2,0,100,0,20,0,0,0,11,33962,0,2,0,0,0,0,0,0,0,0,'Overlord Gorefist - Cast Toughen at 20% HP'),
+(1816011,18160,2,0,100,0,10,0,0,0,11,33962,0,2,0,0,0,0,0,0,0,0,'Overlord Gorefist - Cast Toughen at 10% HP');
 
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL ABOVE -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
