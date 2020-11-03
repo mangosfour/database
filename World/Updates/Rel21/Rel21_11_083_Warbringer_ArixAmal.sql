@@ -18,18 +18,18 @@ BEGIN
 
     -- Expected Values
     SET @cOldVersion = '21'; 
-    SET @cOldStructure = '12'; 
+    SET @cOldStructure = '11'; 
     SET @cOldContent = '082';
 
     -- New Values
     SET @cNewVersion = '21';
-    SET @cNewStructure = '12';
+    SET @cNewStructure = '11';
     SET @cNewContent = '083';
                             -- DESCRIPTION IS 30 Characters MAX    
-    SET @cNewDescription = 'Warbringer ArixAmal Pt2';
+    SET @cNewDescription = 'Warbringer ArixAmal';
 
                         -- COMMENT is 150 Characters MAX
-    SET @cNewComment = 'Warbringer ArixAmal Pt2';
+    SET @cNewComment = 'Warbringer ArixAmal';
 
     -- Evaluate all settings
     SET @cCurResult := (SELECT `description` FROM `db_version` ORDER BY `version` DESC, `STRUCTURE` DESC, `CONTENT` DESC LIMIT 0,1);
@@ -44,10 +44,13 @@ BEGIN
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
 
     
-DELETE FROM `creature_ai_scripts` WHERE `id` = 1929804 AND `creature_id` = 19298;
+UPDATE `creature_template` SET `AIName` = 'EventAI' WHERE `Entry` = 19298;
+DELETE FROM `creature_ai_scripts` WHERE `creature_id` = 19298;
 INSERT INTO`creature_ai_scripts` VALUES
 -- Warbringer Arix'Amal
-(1929805,19298,11,0,100,0,0,0,0,0,0,0,11,32008,0,0,0,0,0,0,0,0,0,0,'Warbringer Arix\'Amal - Cast Fel Fire on Spawn');
+(1929801,19298,2,0,100,1,30,0,60000,60000,11,34250,0,2,0,0,0,0,0,0,0,0,'Warbringer Arix\'Amal - Cast Whipped Fury at 30% HP'),
+(1929802,19298,9,0,100,1,0,5,8000,11000,11,15496,1,0,0,0,0,0,0,0,0,0,'Warbringer Arix\'Amal - Cast Cleave on Range Check Target'),
+(1929803,19298,0,0,100,1,5500,7500,18000,21000,11,32009,1,0,0,0,0,0,0,0,0,0,'Warbringer Arix\'Amal - Cast Cutdown');
 
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL ABOVE -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
