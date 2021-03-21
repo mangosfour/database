@@ -19,17 +19,17 @@ BEGIN
     -- Expected Values
     SET @cOldVersion = '21'; 
     SET @cOldStructure = '11'; 
-    SET @cOldContent = '083';
+    SET @cOldContent = '085';
 
     -- New Values
     SET @cNewVersion = '21';
     SET @cNewStructure = '11';
-    SET @cNewContent = '084';
+    SET @cNewContent = '086';
                             -- DESCRIPTION IS 30 Characters MAX    
-    SET @cNewDescription = 'Warbringer ArixAmal Pt2';
+    SET @cNewDescription = 'game_tele location updates';
 
                         -- COMMENT is 150 Characters MAX
-    SET @cNewComment = 'Warbringer ArixAmal Pt2';
+    SET @cNewComment = 'game_tele location updates';
 
     -- Evaluate all settings
     SET @cCurResult := (SELECT `description` FROM `db_version` ORDER BY `version` DESC, `STRUCTURE` DESC, `CONTENT` DESC LIMIT 0,1);
@@ -44,11 +44,12 @@ BEGIN
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
 
     
-DELETE FROM `creature_ai_scripts` WHERE `id` = 1929804 AND `creature_id` = 19298;
-INSERT INTO`creature_ai_scripts` VALUES
--- Warbringer Arix'Amal
-(1929804,19298,11,0,100,0,0,0,0,0,11,32008,0,0,0,0,0,0,0,0,0,0,'Warbringer Arix\'Amal - Cast Fel Fire on Spawn');
-
+-- AcherusTheEbonHold (Wont tele inside an NPC).
+UPDATE `game_tele` SET `position_x` = 2454.729, `position_y` = -5597.45 WHERE `id` = 1424;
+-- Eastvale Logging Camp (Above ground).
+UPDATE `game_tele` SET `position_z` = 43.161 WHERE `id` = 323;
+-- Thousand Needles (Safe location).
+UPDATE `game_tele` SET `position_x` = -5050.742, `position_y` = -1635.091, `position_z` = 92.436 WHERE `id` = 1206;
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL ABOVE -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -

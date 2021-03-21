@@ -19,17 +19,17 @@ BEGIN
     -- Expected Values
     SET @cOldVersion = '21'; 
     SET @cOldStructure = '11'; 
-    SET @cOldContent = '083';
+    SET @cOldContent = '086';
 
     -- New Values
     SET @cNewVersion = '21';
     SET @cNewStructure = '11';
-    SET @cNewContent = '084';
+    SET @cNewContent = '087';
                             -- DESCRIPTION IS 30 Characters MAX    
-    SET @cNewDescription = 'Warbringer ArixAmal Pt2';
+    SET @cNewDescription = 'AI script for NPC 44564';
 
                         -- COMMENT is 150 Characters MAX
-    SET @cNewComment = 'Warbringer ArixAmal Pt2';
+    SET @cNewComment = 'AI script for NPC 44564';
 
     -- Evaluate all settings
     SET @cCurResult := (SELECT `description` FROM `db_version` ORDER BY `version` DESC, `STRUCTURE` DESC, `CONTENT` DESC LIMIT 0,1);
@@ -44,10 +44,10 @@ BEGIN
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
 
     
-DELETE FROM `creature_ai_scripts` WHERE `id` = 1929804 AND `creature_id` = 19298;
-INSERT INTO`creature_ai_scripts` VALUES
--- Warbringer Arix'Amal
-(1929804,19298,11,0,100,0,0,0,0,0,11,32008,0,0,0,0,0,0,0,0,0,0,'Warbringer Arix\'Amal - Cast Fel Fire on Spawn');
+UPDATE `creature_template` SET `AIName` = 'EventAI' WHERE `Entry` = 44564;
+DELETE FROM `creature_ai_scripts` WHERE `creature_id` = 44564;
+INSERT INTO `creature_ai_scripts` (`id`, `creature_id`, `event_type`, `event_param1`, `event_param2`, `action1_type`, `action1_param1`,`action1_param2`, `comment`) VALUES
+(4456401,44564,8,2061,-1,33,44175,6,'Q. 26919 - kill credit');
 
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL ABOVE -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --

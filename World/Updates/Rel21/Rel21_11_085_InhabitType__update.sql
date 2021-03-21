@@ -19,17 +19,17 @@ BEGIN
     -- Expected Values
     SET @cOldVersion = '21'; 
     SET @cOldStructure = '11'; 
-    SET @cOldContent = '083';
+    SET @cOldContent = '084';
 
     -- New Values
     SET @cNewVersion = '21';
     SET @cNewStructure = '11';
-    SET @cNewContent = '084';
+    SET @cNewContent = '085';
                             -- DESCRIPTION IS 30 Characters MAX    
-    SET @cNewDescription = 'Warbringer ArixAmal Pt2';
+    SET @cNewDescription = 'InhabitType  update';
 
                         -- COMMENT is 150 Characters MAX
-    SET @cNewComment = 'Warbringer ArixAmal Pt2';
+    SET @cNewComment = 'InhabitType  update';
 
     -- Evaluate all settings
     SET @cCurResult := (SELECT `description` FROM `db_version` ORDER BY `version` DESC, `STRUCTURE` DESC, `CONTENT` DESC LIMIT 0,1);
@@ -42,12 +42,13 @@ BEGIN
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL BELOW -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
-
-    
-DELETE FROM `creature_ai_scripts` WHERE `id` = 1929804 AND `creature_id` = 19298;
-INSERT INTO`creature_ai_scripts` VALUES
--- Warbringer Arix'Amal
-(1929804,19298,11,0,100,0,0,0,0,0,11,32008,0,0,0,0,0,0,0,0,0,0,'Warbringer Arix\'Amal - Cast Fel Fire on Spawn');
+    -- Agatha, Aradne and Daschla should fly.
+    -- Agatha
+	UPDATE `creature_template` SET `InhabitType` = 5 WHERE `Entry` = 49044;
+	-- Aradne
+    UPDATE `creature_template` SET `InhabitType` = 5 WHERE `Entry` = 50372;
+    -- Daschla
+    UPDATE `creature_template` SET `InhabitType` = 5 WHERE `Entry` = 49128;
 
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL ABOVE -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
