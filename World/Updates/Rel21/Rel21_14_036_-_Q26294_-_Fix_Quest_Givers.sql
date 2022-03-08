@@ -18,18 +18,18 @@ BEGIN
 
     -- Expected Values
     SET @cOldVersion = '21'; 
-    SET @cOldStructure = '12'; 
-    SET @cOldContent = '001';
+    SET @cOldStructure = '14'; 
+    SET @cOldContent = '035';
 
     -- New Values
     SET @cNewVersion = '21';
-    SET @cNewStructure = '12';
-    SET @cNewContent = '002';
+    SET @cNewStructure = '14';
+    SET @cNewContent = '036';
                             -- DESCRIPTION IS 30 Characters MAX    
-    SET @cNewDescription = 'structure fix';
+    SET @cNewDescription = 'Q26294 - Fix Quest Giver';
 
                         -- COMMENT is 150 Characters MAX
-    SET @cNewComment = 'structure fix';
+    SET @cNewComment = 'Q26294 - Fix Quest Giver';
 
     -- Evaluate all settings
     SET @cCurResult := (SELECT `description` FROM `db_version` ORDER BY `version` DESC, `STRUCTURE` DESC, `CONTENT` DESC LIMIT 0,1);
@@ -43,8 +43,9 @@ BEGIN
         -- -- PLACE UPDATE SQL BELOW -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
 
-    
--- Intentionally left empty
+
+-- Update quest #26294 with the correct quest giver relations.
+DELETE FROM `quest_relations` WHERE `entry` = 39605 AND `quest` = 26294 AND `role` = 0;
 
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL ABOVE -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -98,5 +99,3 @@ CALL update_mangos();
 
 -- Drop the procedure
 DROP PROCEDURE IF EXISTS `update_mangos`;
-
-

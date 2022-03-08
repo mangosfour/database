@@ -18,18 +18,18 @@ BEGIN
 
     -- Expected Values
     SET @cOldVersion = '21'; 
-    SET @cOldStructure = '12'; 
-    SET @cOldContent = '001';
+    SET @cOldStructure = '14'; 
+    SET @cOldContent = '034';
 
     -- New Values
     SET @cNewVersion = '21';
-    SET @cNewStructure = '12';
-    SET @cNewContent = '002';
+    SET @cNewStructure = '14';
+    SET @cNewContent = '035';
                             -- DESCRIPTION IS 30 Characters MAX    
-    SET @cNewDescription = 'structure fix';
+    SET @cNewDescription = 'Q28909 - Fix OfferRewardText';
 
                         -- COMMENT is 150 Characters MAX
-    SET @cNewComment = 'structure fix';
+    SET @cNewComment = 'Q28909 - Fix OfferRewardText';
 
     -- Evaluate all settings
     SET @cCurResult := (SELECT `description` FROM `db_version` ORDER BY `version` DESC, `STRUCTURE` DESC, `CONTENT` DESC LIMIT 0,1);
@@ -43,8 +43,10 @@ BEGIN
         -- -- PLACE UPDATE SQL BELOW -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
 
-    
--- Intentionally left empty
+
+-- Update quest #28909 with the correct OfferRewardText. Source: https://www.youtube.com/watch?v=NwPh3qnLQUw
+UPDATE `quest_template` SET `OfferRewardText` = "<Sauranok nods toward you.>$B$B$C." WHERE `Entry` = 28909;
+
 
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL ABOVE -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -98,5 +100,3 @@ CALL update_mangos();
 
 -- Drop the procedure
 DROP PROCEDURE IF EXISTS `update_mangos`;
-
-

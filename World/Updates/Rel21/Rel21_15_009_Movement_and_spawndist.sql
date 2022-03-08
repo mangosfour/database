@@ -18,18 +18,18 @@ BEGIN
 
     -- Expected Values
     SET @cOldVersion = '21'; 
-    SET @cOldStructure = '12'; 
-    SET @cOldContent = '001';
+    SET @cOldStructure = '15'; 
+    SET @cOldContent = '008';
 
     -- New Values
     SET @cNewVersion = '21';
-    SET @cNewStructure = '12';
-    SET @cNewContent = '002';
+    SET @cNewStructure = '15';
+    SET @cNewContent = '009';
                             -- DESCRIPTION IS 30 Characters MAX    
-    SET @cNewDescription = 'structure fix';
+    SET @cNewDescription = 'Movement and spawndist ';
 
                         -- COMMENT is 150 Characters MAX
-    SET @cNewComment = 'structure fix';
+    SET @cNewComment = 'Movement and spawndist ';
 
     -- Evaluate all settings
     SET @cCurResult := (SELECT `description` FROM `db_version` ORDER BY `version` DESC, `STRUCTURE` DESC, `CONTENT` DESC LIMIT 0,1);
@@ -42,9 +42,8 @@ BEGIN
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL BELOW -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
-
-    
--- Intentionally left empty
+	-- Fix a few startup errors dealing with spawndist and MovementType.
+    UPDATE `creature` SET `spawndist` = 0, `MovementType` = 0 WHERE `id` IN (881,473,880,42557,44891,44889,44890,44888,44835);
 
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL ABOVE -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --

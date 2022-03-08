@@ -18,18 +18,18 @@ BEGIN
 
     -- Expected Values
     SET @cOldVersion = '21'; 
-    SET @cOldStructure = '12'; 
-    SET @cOldContent = '001';
+    SET @cOldStructure = '15'; 
+    SET @cOldContent = '006';
 
     -- New Values
     SET @cNewVersion = '21';
-    SET @cNewStructure = '12';
-    SET @cNewContent = '002';
+    SET @cNewStructure = '15';
+    SET @cNewContent = '007';
                             -- DESCRIPTION IS 30 Characters MAX    
-    SET @cNewDescription = 'structure fix';
+    SET @cNewDescription = 'Fix Quest start up error';
 
                         -- COMMENT is 150 Characters MAX
-    SET @cNewComment = 'structure fix';
+    SET @cNewComment = 'Fix Quest start up error';
 
     -- Evaluate all settings
     SET @cCurResult := (SELECT `description` FROM `db_version` ORDER BY `version` DESC, `STRUCTURE` DESC, `CONTENT` DESC LIMIT 0,1);
@@ -42,9 +42,8 @@ BEGIN
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL BELOW -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
-
-    
--- Intentionally left empty
+	-- Update Quest requirements. 
+    UPDATE `quest_template` SET `ReqSourceId1` = 30425, `ReqSourceId2` = 0, `ReqSourceCount2` = 0 WHERE `entry` = 10538;
 
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL ABOVE -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --

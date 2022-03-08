@@ -18,18 +18,18 @@ BEGIN
 
     -- Expected Values
     SET @cOldVersion = '21'; 
-    SET @cOldStructure = '12'; 
-    SET @cOldContent = '001';
+    SET @cOldStructure = '14'; 
+    SET @cOldContent = '025';
 
     -- New Values
     SET @cNewVersion = '21';
-    SET @cNewStructure = '12';
-    SET @cNewContent = '002';
+    SET @cNewStructure = '14';
+    SET @cNewContent = '026';
                             -- DESCRIPTION IS 30 Characters MAX    
-    SET @cNewDescription = 'structure fix';
+    SET @cNewDescription = 'Object Positions update';
 
                         -- COMMENT is 150 Characters MAX
-    SET @cNewComment = 'structure fix';
+    SET @cNewComment = 'Object Positions update';
 
     -- Evaluate all settings
     SET @cCurResult := (SELECT `description` FROM `db_version` ORDER BY `version` DESC, `STRUCTURE` DESC, `CONTENT` DESC LIMIT 0,1);
@@ -43,8 +43,10 @@ BEGIN
         -- -- PLACE UPDATE SQL BELOW -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
 
-    
--- Intentionally left empty
+	UPDATE `gameobject` SET `position_z` = 88.83889 WHERE `guid` = 16302;
+	UPDATE `gameobject` SET `position_z` = 75.518799 WHERE `guid` = 1114;
+	UPDATE `gameobject` SET `position_z` = -1132.0085, `position_z` = -1872.901, `position_z` = 79.406960 WHERE `guid` = 2665;
+
 
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL ABOVE -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --

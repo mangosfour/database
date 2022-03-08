@@ -18,18 +18,18 @@ BEGIN
 
     -- Expected Values
     SET @cOldVersion = '21'; 
-    SET @cOldStructure = '12'; 
-    SET @cOldContent = '001';
+    SET @cOldStructure = '14'; 
+    SET @cOldContent = '038';
 
     -- New Values
     SET @cNewVersion = '21';
-    SET @cNewStructure = '12';
-    SET @cNewContent = '002';
+    SET @cNewStructure = '14';
+    SET @cNewContent = '039';
                             -- DESCRIPTION IS 30 Characters MAX    
-    SET @cNewDescription = 'structure fix';
+    SET @cNewDescription = 'Hulking Abomination';
 
                         -- COMMENT is 150 Characters MAX
-    SET @cNewComment = 'structure fix';
+    SET @cNewComment = 'Hulking Abomination';
 
     -- Evaluate all settings
     SET @cCurResult := (SELECT `description` FROM `db_version` ORDER BY `version` DESC, `STRUCTURE` DESC, `CONTENT` DESC LIMIT 0,1);
@@ -43,8 +43,17 @@ BEGIN
         -- -- PLACE UPDATE SQL BELOW -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
 
-    
--- Intentionally left empty
+	-- Hulking Abomination
+	UPDATE `creature_template` SET `AIName` = 'EventAI'	WHERE `Entry` = 31140;
+
+	-- TO DO:  3114001's `action1_param2`,`action1_param3` are not correct.
+	-- This should be set at 1,0, however it currently does not trigger the spell on death.
+	-- The current method below allows the spell to trigger but will always "miss".
+	DELETE FROM `creature_ai_scripts` WHERE `creature_id` = 31140;
+	INSERT INTO `creature_ai_scripts` (`id`, `creature_id`, `event_type`, `event_inverse_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `action1_type`, `action1_param1`, `action1_param2`, `action1_param3`, `action2_type`, `action2_param1`, `action2_param2`, `action2_param3`, `action3_type`, `action3_param1`, `action3_param2`, `action3_param3`, `comment`) values 
+	(3114001,31140,6,0,100,0,0,0,0,0,11,58995,6,7,0,0,0,0,0,0,0,0,'Hulking Abomination - On Just Died - Cast Exploding Corpse'),
+	(3114002,31140,9,0,100,1,8,40,0,0,11,50335,1,0,0,0,0,0,0,0,0,0,'Hulking Abomination - Within 8-40 Range - Cast Scourge Hook'),
+	(3114003,31140,0,0,100,1,3000,3000,7000,7000,11,40504,1,0,0,0,0,0,0,0,0,0,'Hulking Abomination - In Combat - Cast Cleave');
 
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL ABOVE -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --

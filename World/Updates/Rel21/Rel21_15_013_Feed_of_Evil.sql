@@ -18,18 +18,18 @@ BEGIN
 
     -- Expected Values
     SET @cOldVersion = '21'; 
-    SET @cOldStructure = '12'; 
-    SET @cOldContent = '001';
+    SET @cOldStructure = '15'; 
+    SET @cOldContent = '012';
 
     -- New Values
     SET @cNewVersion = '21';
-    SET @cNewStructure = '12';
-    SET @cNewContent = '002';
+    SET @cNewStructure = '15';
+    SET @cNewContent = '013';
                             -- DESCRIPTION IS 30 Characters MAX    
-    SET @cNewDescription = 'structure fix';
+    SET @cNewDescription = 'Feed of Evil';
 
                         -- COMMENT is 150 Characters MAX
-    SET @cNewComment = 'structure fix';
+    SET @cNewComment = 'Feed of Evil';
 
     -- Evaluate all settings
     SET @cCurResult := (SELECT `description` FROM `db_version` ORDER BY `version` DESC, `STRUCTURE` DESC, `CONTENT` DESC LIMIT 0,1);
@@ -43,8 +43,32 @@ BEGIN
         -- -- PLACE UPDATE SQL BELOW -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
 
-    
--- Intentionally left empty
+	-- Update some unitflags2 and add EventAI.
+	UPDATE `creature_template` SET `UnitFlags2` = 2048, `AIName` = 'EventAI' WHERE `Entry` = 36727;
+	UPDATE `creature_template` SET `UnitFlags2` = 2048, `AIName` = 'EventAI' WHERE `Entry` = 37155;
+	UPDATE `creature_template` SET `UnitFlags2` = 2048, `AIName` = 'EventAI' WHERE `Entry` = 37156;
+
+	-- Script for Kill credit and Despawn for Trough 1st, 2nd and 3rd.
+	DELETE FROM `creature_ai_scripts` WHERE `creature_id` IN (36727,37155,37156);
+	INSERT INTO `creature_ai_scripts` (`id`, `creature_id`, `event_type`, `event_inverse_phase_mask`, `event_chance`, `event_flags`, `event_param1`, `event_param2`, `event_param3`, `event_param4`, `action1_type`, `action1_param1`, `action1_param2`, `action1_param3`, `action2_type`, `action2_param1`, `action2_param2`, `action2_param3`, `action3_type`, `action3_param1`, `action3_param2`, `action3_param3`, `comment`) VALUES
+	(3672701,36727,8,0,100,0, 69228,-1,0,0,33,36727,6,0,0,0,0,0,0,0,0,0,'First Trough - On Spellhit - Quest Credit- 14461'),
+	(3672702,36727,8,0,100,0, 69228,-1,0,0,11,42345,0,0,0,0,0,0,0,0,0,0,'First Trough - On Spellhit - Cast Cosmetic - Flame Patch'),
+	(3715501,37155,8,0,100,0, 69228,-1,0,0,33,37155,6,0,0,0,0,0,0,0,0,0,'Second Trough - On Spellhit - Quest Credit- 14461'),
+	(3715502,37155,8,0,100,0, 69228,-1,0,0,11,42345,0,0,0,0,0,0,0,0,0,0,'Second Trough - On Spellhit - Cast Cosmetic - Flame Patch'),
+	(3715601,37156,8,0,100,0, 69228,-1,0,0,33,37156,6,0,0,0,0,0,0,0,0,0,'Second Trough - On Spellhit - Quest Credit- 14461'),
+	(3715602,37156,8,0,100,0, 69228,-1,0,0,11,42345,0,0,0,0,0,0,0,0,0,0,'Second Trough - On Spellhit - Cast Cosmetic - Flame Patch');
+
+	-- Prevent Trough from moving around.
+	UPDATE `creature` SET `spawntimesecs` = 120, `spawndist` = 0, `MovementType` = 0 WHERE `guid` = 260129;
+	UPDATE `creature` SET `spawntimesecs` = 120, `spawndist` = 0, `MovementType` = 0 WHERE `guid` = 260130;
+	UPDATE `creature` SET `spawntimesecs` = 120, `spawndist` = 0, `MovementType` = 0 WHERE `guid` = 260131;
+
+	-- Spell Target.
+	DELETE FROM `spell_script_target` WHERE `entry` = 69228;
+	INSERT INTO `spell_script_target` (`entry`, `type`, `targetEntry`, `inverseEffectMask`) VALUES
+	(69228,1,36727,0),
+	(69228,1,37155,0),
+	(69228,1,37156,0);
 
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL ABOVE -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --

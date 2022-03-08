@@ -18,12 +18,12 @@ BEGIN
     -- Expected Values
     SET @cOldVersion = '21'; 
     SET @cOldStructure = '11'; 
-    SET @cOldContent = '056'; 
+    SET @cOldContent = '087'; 
 
     -- New Values
     SET @cNewVersion = '21';
-    SET @cNewStructure = '11';
-    SET @cNewContent = '057';
+    SET @cNewStructure = '12';
+    SET @cNewContent = '001';
                             -- DESCRIPTION IS 30 Characters MAX    
     SET @cNewDescription = 'warden_refactor';
 

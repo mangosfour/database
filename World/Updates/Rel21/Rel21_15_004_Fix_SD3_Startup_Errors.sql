@@ -18,18 +18,18 @@ BEGIN
 
     -- Expected Values
     SET @cOldVersion = '21'; 
-    SET @cOldStructure = '12'; 
-    SET @cOldContent = '001';
+    SET @cOldStructure = '15'; 
+    SET @cOldContent = '003';
 
     -- New Values
     SET @cNewVersion = '21';
-    SET @cNewStructure = '12';
-    SET @cNewContent = '002';
+    SET @cNewStructure = '15';
+    SET @cNewContent = '004';
                             -- DESCRIPTION IS 30 Characters MAX    
-    SET @cNewDescription = 'structure fix';
+    SET @cNewDescription = 'Fix_SD3_Startup_Errors';
 
                         -- COMMENT is 150 Characters MAX
-    SET @cNewComment = 'structure fix';
+    SET @cNewComment = 'Fix_SD3_Startup_Errors';
 
     -- Evaluate all settings
     SET @cCurResult := (SELECT `description` FROM `db_version` ORDER BY `version` DESC, `STRUCTURE` DESC, `CONTENT` DESC LIMIT 0,1);
@@ -43,8 +43,14 @@ BEGIN
         -- -- PLACE UPDATE SQL BELOW -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
 
-    
--- Intentionally left empty
+INSERT INTO `script_binding` (`type`,`ScriptName`,`bind`,`data`) VALUE (3,'at_shadowforge_bridge',1786,0);
+INSERT INTO `script_binding` (`type`,`ScriptName`,`bind`,`data`) VALUE (1,'go_fixed_trap',179512,0);
+INSERT INTO `script_binding` (`type`,`ScriptName`,`bind`,`data`) VALUE (0,'npc_artorius_the_doombringer',14531,0);
+INSERT INTO `script_binding` (`type`,`ScriptName`,`bind`,`data`) VALUE (0,'npc_klinfran_the_crazed',14529,0);
+INSERT INTO `script_binding` (`type`,`ScriptName`,`bind`,`data`) VALUE (0,'npc_precious_the_devourer',14538,0);
+INSERT INTO `script_binding` (`type`,`ScriptName`,`bind`,`data`) VALUE (0,'npc_simone_the_inconspicuous',14527,0);
+INSERT INTO `script_binding` (`type`,`ScriptName`,`bind`,`data`) VALUE (0,'npc_simone_the_seductress',14533,0);
+INSERT INTO `script_binding` (`type`,`ScriptName`,`bind`,`data`) VALUE (0,'npc_solenor_the_slayer',14536,0);
 
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL ABOVE -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -98,5 +104,3 @@ CALL update_mangos();
 
 -- Drop the procedure
 DROP PROCEDURE IF EXISTS `update_mangos`;
-
-

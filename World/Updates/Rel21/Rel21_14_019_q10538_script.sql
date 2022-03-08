@@ -18,18 +18,18 @@ BEGIN
 
     -- Expected Values
     SET @cOldVersion = '21'; 
-    SET @cOldStructure = '12'; 
-    SET @cOldContent = '001';
+    SET @cOldStructure = '14'; 
+    SET @cOldContent = '018';
 
     -- New Values
     SET @cNewVersion = '21';
-    SET @cNewStructure = '12';
-    SET @cNewContent = '002';
+    SET @cNewStructure = '14';
+    SET @cNewContent = '019';
                             -- DESCRIPTION IS 30 Characters MAX    
-    SET @cNewDescription = 'structure fix';
+    SET @cNewDescription = 'q10538 script';
 
                         -- COMMENT is 150 Characters MAX
-    SET @cNewComment = 'structure fix';
+    SET @cNewComment = 'q10538 script';
 
     -- Evaluate all settings
     SET @cCurResult := (SELECT `description` FROM `db_version` ORDER BY `version` DESC, `STRUCTURE` DESC, `CONTENT` DESC LIMIT 0,1);
@@ -43,8 +43,26 @@ BEGIN
         -- -- PLACE UPDATE SQL BELOW -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
 
-    
--- Intentionally left empty
+	UPDATE `creature_template` SET `AIName` = 'EventAI' WHERE `entry` = 21306;
+    DELETE FROM `creature_ai_scripts` WHERE `creature_id`= 21306;
+	INSERT INTO `creature_ai_scripts` VALUES
+	(2130601,21306,11,0,100,0,0,0,0,0,48,1,15,0,0,0,0,0,0,0,0,0,'Cursed Scarab - SET Random Movement on spawn'),
+	(2130602,21306,1,0,30,0,5000,9000,0,0,2,14,1,0,0,0,0,0, 0,0,0,0,'Cursed Scarab - 30% Should Change Faction'),
+	(2130603,21306,1,0,100,0,18000,24000,0,0,41,0,0,0,0,0,0,0,0,0,0,0,'Cursed Scarab - despawn self');
+
+	-- q.10538 'Boiling Blood'
+	DELETE FROM `spell_script_target` WHERE `entry` = 36546;
+	INSERT INTO `spell_script_target` (`entry`, `type`, `targetEntry`) VALUES
+	(36546,0,184715);
+	DELETE FROM `db_scripts` WHERE id = 184715;
+	INSERT INTO `db_scripts` (`script_type`,`id`, `delay`, `command`, `datalong`, `datalong2`, `buddy_entry`, `search_radius`, `data_flags`, `dataint`, `dataint2`, `dataint3`, `dataint4`, `x`, `y`, `z`, `o`, `comments`) VALUES
+	(7,184715,1,10,21308,4000,0,0,0,0,0,0,0,-967.271,2174.77,15.8136,3.94127,'Cursed Scarab Summoner'),
+	(3,2130801,1,15,36555,0,0,0,0,0,0,0,0,0,0,0,0,'Cast - Summon Cursed Scarabs');
+	UPDATE `creature_template` SET `MovementType` = 2 WHERE `entry` = 21308;
+	DELETE FROM `creature_movement_template` WHERE `entry` = 21308;
+	INSERT INTO `creature_movement_template` (`entry`, `point`, `position_x`, `position_y`, `position_z`, `waittime`, `script_id`, `orientation`, `model1`, `model2`) VALUES
+	(21308,1,-967.271,2174.77,15.8136,10000,2130801,3.94127,0,0);
+
 
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL ABOVE -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --

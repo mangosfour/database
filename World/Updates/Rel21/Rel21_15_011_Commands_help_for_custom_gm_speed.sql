@@ -18,18 +18,18 @@ BEGIN
 
     -- Expected Values
     SET @cOldVersion = '21'; 
-    SET @cOldStructure = '12'; 
-    SET @cOldContent = '001';
+    SET @cOldStructure = '15'; 
+    SET @cOldContent = '010';
 
     -- New Values
     SET @cNewVersion = '21';
-    SET @cNewStructure = '12';
-    SET @cNewContent = '002';
+    SET @cNewStructure = '15';
+    SET @cNewContent = '011';
                             -- DESCRIPTION IS 30 Characters MAX    
-    SET @cNewDescription = 'structure fix';
+    SET @cNewDescription = 'Custom_GM_Speed_commands_help';
 
                         -- COMMENT is 150 Characters MAX
-    SET @cNewComment = 'structure fix';
+    SET @cNewComment = 'Need update your mangosd.conf file and add GM.MaxSpeedFactor value, otherwise default will be 10';
 
     -- Evaluate all settings
     SET @cCurResult := (SELECT `description` FROM `db_version` ORDER BY `version` DESC, `STRUCTURE` DESC, `CONTENT` DESC LIMIT 0,1);
@@ -42,9 +42,27 @@ BEGIN
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL BELOW -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
+		
+		/* Update help displayed for ".modify speed" command */
+		UPDATE `command` 
+		SET `help_text` = 'Syntax: .modify speed #rate.speed #rate Modify the running speed of the selected player to \r normal base run speed\"\"*rate. If no player is selected, modify your speed. #rate may range from 0.1 to GM.MaxSpeedFactor defined in mangosd.conf.\"' 
+		WHERE (`command_text` = 'modify speed');
 
-    
--- Intentionally left empty
+		/* Update help displayed for ".modify swim" command */
+		UPDATE `command` 
+		SET `help_text` = 'Syntax: .modify swim #rate Modify the swim speed of the selected player to \r normal swim speed\"\"*rate. If no player is selected, modify your speed. #rate may range from 0.1 to GM.MaxSpeedFactor defined in mangosd.conf.\"' 
+		WHERE (`command_text` = 'modify swim');
+
+		/* Update help displayed for ".modify bwalk" command */
+		UPDATE `command` 
+		SET `help_text` = 'Syntax: .modify bwalk #rate Modify the speed of the selected player while running backwards to \r normal walk back speed\"\"*rate. If no player is selected, modify your speed. #rate may range from 0.1 to GM.MaxSpeedFactor defined in mangosd.conf.\"' 
+		WHERE (`command_text` = 'modify bwalk');
+
+		/* Update help displayed for ".modify aspeed" command */
+		UPDATE `command`
+		SET `help_text` = 'Syntax: .modify aspeed #rate Modify all speeds -run,swim,run back,swim back- of the selected player to \r normal base speed for this move type\"\"*rate. If no player is selected, modify your speed. #rate may range from 0.1 to GM.MaxSpeedFactor defined in mangosd.conf.\"' 
+		WHERE (`command_text` = 'modify aspeed');
+
 
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL ABOVE -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --

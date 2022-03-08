@@ -18,18 +18,18 @@ BEGIN
 
     -- Expected Values
     SET @cOldVersion = '21'; 
-    SET @cOldStructure = '12'; 
-    SET @cOldContent = '001';
+    SET @cOldStructure = '14'; 
+    SET @cOldContent = '020';
 
     -- New Values
     SET @cNewVersion = '21';
-    SET @cNewStructure = '12';
-    SET @cNewContent = '002';
+    SET @cNewStructure = '14';
+    SET @cNewContent = '021';
                             -- DESCRIPTION IS 30 Characters MAX    
-    SET @cNewDescription = 'structure fix';
+    SET @cNewDescription = 'NPC 46268 quest support scrip';
 
                         -- COMMENT is 150 Characters MAX
-    SET @cNewComment = 'structure fix';
+    SET @cNewComment = 'NPC 46268 quest support script';
 
     -- Evaluate all settings
     SET @cCurResult := (SELECT `description` FROM `db_version` ORDER BY `version` DESC, `STRUCTURE` DESC, `CONTENT` DESC LIMIT 0,1);
@@ -43,8 +43,15 @@ BEGIN
         -- -- PLACE UPDATE SQL BELOW -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
 
-    
--- Intentionally left empty
+    UPDATE `creature_template` SET `AIName` = 'EventAI' WHERE `Entry` = 46268;
+	DELETE FROM `creature_ai_scripts` WHERE `creature_id` = 46268;
+	INSERT INTO `creature_ai_scripts` VALUES 
+	(4626801,46268,8,0,100,0,86264,-1,0,0,41,1000,0,0,0,0,0,0,0,0,0,0,'Q. 27671 - Survivor despawn on hit'),
+	(4626802,46268,8,0,100,0,86264,-1,0,0,33,46268,6,0,0,0,0,0,0,0,0,0,'Q. 27671 - Survivor kill credit');
+	-- Spell 86264 should only target survivers. Spell still target ALL (Needs core support).
+	DELETE FROM `spell_script_target` WHERE `entry` = 86264;
+	INSERT INTO `spell_script_target` (`entry`,`type`,`targetEntry`) VALUES
+	(86264,1,46268);
 
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL ABOVE -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
