@@ -1,3 +1,3 @@
 @ECHO OFF
 
-IF NOT DEFINED coreNum set coreNum=3
+IF NOT DEFINED coreNum set coreNum=4

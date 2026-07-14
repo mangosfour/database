@@ -12,7 +12,7 @@ DDUMPDIR=./mangos
 i=1
 
 
-do_dump_three() {
+do_dump_four() {
 
 mkdir -p ${DUMPDIR}
 
@@ -161,7 +161,7 @@ for TABLE in \
 echo "Dumping ${i}/124 ${TABLE}..."
 
 echo "--
--- Copyright (C) 2005-2024 MaNGOS <https://getmangos.eu/> <https://github.com/mangoszero>
+-- Copyright (C) 2005-2026 MaNGOS <https://getmangos.eu/> <https://github.com/mangoszero>
 --
 -- This program is free software; you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -221,4 +221,4 @@ fi
 
 DB=$1
 
-do_dump_three
+do_dump_four

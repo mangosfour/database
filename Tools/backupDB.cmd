@@ -21,10 +21,10 @@ set svr=localhost
 set user=root
 set pass=mangos
 set port=3306
-set wdb=mangos3
-set wdborig=mangos3
-set cdb=character3
-set cdborig=character3
+set wdb=mangos4
+set wdborig=mangos4
+set cdb=character4
+set cdborig=character4
 set rdb=realmd
 set rdborig=realmd
 
