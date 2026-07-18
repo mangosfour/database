@@ -723,9 +723,9 @@ INSERT INTO player_levelstats (race,class,level,str,agi,sta,inte,spi) VALUES
 (24,10,90,95,115,254,176,192);
 
 INSERT INTO playercreateinfo_action (race,class,button,action,type) VALUES
-(24,1,0,6603,0),
-(24,1,1,78,0),
-(24,1,9,107079,0),
+(24,1,72,88163,0),
+(24,1,73,88161,0),
+(24,1,81,107079,0),
 (24,3,0,3044,0),
 (24,3,9,107079,0),
 (24,3,10,9,48),
@@ -1096,6 +1096,48 @@ INSERT INTO `playercreateinfo_spell` (`race`, `class`, `Spell`, `Note`) VALUES
 (24, 10, 113873, 'Enable Remove talent'),
 (24, 10, 131701, 'Languages (Racial Passive)'),
 (24, 10, 134735, 'Battle Fatigue');
+
+        -- ---------------------------------------------------------------------------
+        -- Post-review reconcile (Codex PR #1): align race-24 starters to the
+        -- class-standard set the live races use in World/Setup/FullDB. Adds the
+        -- class-universal starter spells the SFDB-sourced lists were missing
+        -- (Auto Shot, Call Pet 1, Fireball, per-class Armor/Weapon Skills passives,
+        -- class passive auras, etc.) computed as the intersection of every
+        -- same-class race. Monk (class 10) has no same-class FullDB baseline and is
+        -- left as sourced. (Warrior action-bar stance-page fix is in the action block above.)
+        -- ---------------------------------------------------------------------------
+INSERT INTO `playercreateinfo_spell` (`race`,`class`,`Spell`,`Note`) VALUES
+(24,1,8737,'Mail'),
+(24,3,75,'Auto Shot'),
+(24,3,883,'Call Pet 1'),
+(24,3,13358,'Defensive State (DND)'),
+(24,3,24949,'Defensive State 2 (DND)'),
+(24,3,34082,'Hunter Passive Auras (DND)'),
+(24,3,76249,'Weapon Skills'),
+(24,3,76250,'Armor Skills'),
+(24,3,77442,'Focus'),
+(24,3,82928,'Aimed Shot!'),
+(24,3,87324,'Focused Aim'),
+(24,3,87816,'General Hunter Passives'),
+(24,4,16092,'Defensive State (DND)'),
+(24,4,76273,'Armor Skills'),
+(24,4,76297,'Weapon Skills'),
+(24,5,76279,'Armor Skills'),
+(24,5,76301,'Weapon Skills'),
+(24,5,88684,'Holy Word: Serenity'),
+(24,5,88685,'Holy Word: Sanctuary'),
+(24,5,101062,'Flash Heal'),
+(24,7,27763,'Relic'),
+(24,7,76272,'Armor Skills'),
+(24,7,76296,'Weapon Skills'),
+(24,7,89920,'Ancestral Focus'),
+(24,8,133,'Fireball'),
+(24,8,71761,'Deep Freeze Immunity State'),
+(24,8,76276,'Armor Skills'),
+(24,8,76298,'Weapon Skills'),
+(24,8,79684,'Offensive State (DND)'),
+(24,8,85801,'DPS Caster Crit Damage Bonus'),
+(24,8,92315,'Pyroblast!');
 
         -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
         -- -- PLACE UPDATE SQL ABOVE -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
